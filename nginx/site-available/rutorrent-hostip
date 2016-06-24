@@ -1,0 +1,32 @@
+server {
+	listen 80 default_server;
+	server_name _;
+	root /var/www/html;
+	index index.html;
+	error_log /var/log/nginx/error.log warn;
+
+	location /RPC1 {
+		include scgi_params;
+		scgi_pass unix:///home/seedbox/.rtorrent-scgi.sock;
+	}
+
+	error_page 500 502 503 504 /50x.html;
+	location = /50x.html {
+		root /usr/share/nginx/html;
+	}
+
+	location ~ .php$ {
+		fastcgi_split_path_info ^(.+\.php)(/.+)$;
+		fastcgi_pass unix:/var/run/php5-fpm.sock;
+		fastcgi_index index.php;
+		try_files $uri = 404;
+		include fastcgi_params;
+		fastcgi_param SCRIPT_FILENAME $request_filename;
+		fastcgi_read_timeout 300;
+	}
+
+	location / {
+	auth_basic "Restricted Access";
+	auth_basic_user_file /var/www/html/.htpasswd;
+	}
+}
