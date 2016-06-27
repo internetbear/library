@@ -32,7 +32,7 @@ directory                        = /home/seedbox/rtorrent/downloads
 session                          = /home/seedbox/rtorrent/.session
 schedule                         = watch_directory,5,5,load_start=/home/seedbox/rtorrent/watch/*.torrent
 encoding_list                    = UTF-8
-system.umask.set	        	 = 0000 #set file permission created with rtorrent (777)
+system.umask.set                 = 0000
 
 # ----------------------------------------------------------------------
 # Network
@@ -40,9 +40,8 @@ system.umask.set	        	 = 0000 #set file permission created with rtorrent (77
 
 port_range                       = 55556-55560
 scgi_local                       = /home/seedbox/.rtorrent-scgi.sock
-execute				             = {sh,-c,/bin/chmod g=rwx /home/seedbox/.rtorrent-scgi.sock}
-execute			              	 = {sh,-c,/usr/bin/php /var/www/html/rutorrent/php/initplugins.php seedbox &}
-execute                          = {sh,-c,/bin/chgrp rutorrent /home/seedbox/.rtorrent-scgi.sock}
+execute                          = {sh,-c,/bin/chmod g=rwx /home/seedbox/.rtorrent-scgi.sock}
+execute                          = {sh,-c,/usr/bin/php /var/www/html/rutorrent/php/initplugins.php seedbox &}
 network.http.ssl_verify_peer.set = 0
 port_random                      = yes
 use_udp_trackers                 = yes
