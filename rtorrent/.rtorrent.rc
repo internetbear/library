@@ -63,7 +63,7 @@ peer_exchange                    = yes
 
 check_hash                       = no
 pieces.preload.type.set          = 1
-max_memory_usage                 = 175M
+max_memory_usage                 = 350M
 
 # ----------------------------------------------------------------------
 # Custom
